@@ -1,0 +1,25 @@
+* {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    box-sizing: border-box;
+}
+.root {
+    max-height: 670px;
+    background-image: url("./img/fondo.svg");
+}
+
+/* 
+
+.estrella-cont {
+    margin: 3%;
+    position: relative;
+}
+.estrella__texto {
+    position: absolute;
+    color: white;
+    font-size: 45px;
+    margin: 0px;
+    top: 35%;
+    left: 50px;
+    
+} */
