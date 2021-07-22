@@ -6,6 +6,7 @@ import { initJugadas } from "./components/jugadas";
 import { initTiempo } from "./components/tiempo";
 
 import { initRouter } from "./routes";
+import { state } from "./state";
 
 import {tests} from "./stateTest"
 
@@ -18,8 +19,8 @@ function main(){
     initTiempo();
     initFooter();
     initCuadro();
-    const root = document.querySelector(".root");    
-    console.log('root init', root);
+    const root = document.querySelector(".root");  
+    // state.initScore();  
     
     initRouter(root);
 }

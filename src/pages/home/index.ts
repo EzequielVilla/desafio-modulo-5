@@ -25,13 +25,25 @@ export function initHome(param){
         }
         @media (min-width: 376px) {
             .titulo{
-                padding-left: 475px;
+                display:flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
             }
             .boton-comp{
-                margin: 45px 20px 65px 485px;
+                display:flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
             }
             .footer-comp{
-                margin-left:450px;
+                display:flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
             }
         }
     `

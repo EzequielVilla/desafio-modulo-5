@@ -7,6 +7,10 @@ import { initResultado } from "./pages/resultado"
 const routes = 
 [
     {
+        path: /^\/desafio-modulo-5$/,
+        component: initHome,
+    },
+    {
         path: /^\/home$/,
         component: initHome,
     },
@@ -44,6 +48,8 @@ export function initRouter(container:Element){
         });
     }
     const direccionLocalStorage = (JSON.parse(localStorage.getItem("path")));
+    if(location.host.includes("github.io"))
+        goTo("/home");
     if(direccionLocalStorage != null && location.pathname != "/home")
         handleRoute(direccionLocalStorage )
     else if(location.pathname === "/")

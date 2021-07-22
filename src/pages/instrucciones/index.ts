@@ -6,7 +6,7 @@ export function initInstruccion(param){
 
     style.textContent=
     `
-        .titulo{
+        .titulo-cont__texto{
             width:315px;
             padding-top : 70px;
             padding-left: 35px;
@@ -21,16 +21,41 @@ export function initInstruccion(param){
             margin-left:50px;
         }
         @media (min-width: 376px) {
-            .titulo{   
-                width:750px;
-                padding-left: 435px;                
+            .inst-cont{
+                 display:flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+            .titulo-cont{
+                display:flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+            .titulo-cont__texto{   
+                
+                width:300px;             
             }
             .boton-comp{
-                margin: 45px 20px 65px 485px;
+                margin-top: 45px;
+                margin-bottom:65px;
+                display:flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
     
             }
             .footer-comp{
-                margin-left:450px;
+                display:flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                
             }
         
         }
@@ -38,8 +63,9 @@ export function initInstruccion(param){
     `
 
     componentEl.innerHTML=`
-
-            <h1 class="titulo">Presioná jugar y elegí: piedra, papel o tijera antes de que pasen los 3 segundos. </h1>
+            <div class="titulo-cont">
+                <h1 class="titulo-cont__texto">Presioná jugar y elegí: piedra, papel o tijera antes de que pasen los 3 segundos. </h1>  
+            </div>
             <div class="boton-comp">
                 <boton-component class=>¡Jugar!</boton-component>
             </div>

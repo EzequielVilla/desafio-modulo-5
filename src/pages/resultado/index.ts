@@ -1,11 +1,12 @@
-const estrellaPerdedora = require("url:./../../img/StarPerdedora.svg");
-const estrellaGanadora  = require("url:./../../img/StarGanadora.svg");
-
-
 import { state } from "../../state";
 
+
 export function initResultado(param){
+    const estrellaPerdedora = require("url:./../../img/StarPerdedora.svg");
+    const estrellaGanadora  = require("url:./../../img/StarGanadora.svg");
     const ganador = verificar();
+    
+    
     const containerEl = document.createElement('div');
     containerEl.classList.add("cuadro-cont");
     const componentEl = document.createElement("div");
@@ -29,13 +30,12 @@ export function initResultado(param){
         .inst-cont{
             position:fixed;
             background-image: url("./../../img/fondo.svg");
-            max-height:670px;
             overflow: hidden;
-
         }
         .cuadro-cont{
             background-color:  rgba(136, 137, 73, 0.9);
-            ;
+            height:100vh;
+            width:100%;
             z-index:1;
             position:fixed;
 
@@ -54,24 +54,48 @@ export function initResultado(param){
             padding-bottom:20px;
         }  
         @media (min-width: 376px) {
+            .inst-cont{
+                  
+                left:35%;
+
+            }
             .imagen-comp{
-                padding: 0px 480px;
+                display:flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                
                 padding-top: 25px;
             }
+
             .cuadro-comp{
-                padding: 20px 475px;   
-    
+                display:flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                
+                padding: 20px;   
+   
             }
             .boton-comp{
-                padding:0px 440px;
+                display:flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                padding:0px;
                 padding-bottom:20px;
             }  
-
         }
         ` 
         containerEl.appendChild(style);
         containerEl.appendChild(componentEl);  
         const imagen = containerEl.querySelector("imagen-estrella").shadowRoot.querySelector("img");
+        const texto = containerEl.querySelector("imagen-estrella").shadowRoot.querySelector(".texto");
+
+        texto.textContent= "Ganaste";
         imagen.setAttribute("src", estrellaGanadora)   
     }
     else{
@@ -80,13 +104,14 @@ export function initResultado(param){
         `
             .inst-cont{
                 position:fixed;
-                background-image: url("./../../img/fondo.svg");
-                max-height:670px;
+                background-image: url("./../../img/fondo.svg");    
                 overflow: hidden;
 
             }
             .cuadro-cont{
                 background-color: rgba(137, 73, 73, 0.9) ;
+                height:100vh;
+                width:100%;
                 z-index:1;
                 position:fixed;
 
@@ -105,16 +130,35 @@ export function initResultado(param){
                 padding-bottom:20px;
             }  
             @media (min-width: 376px) {
+                .inst-cont{
+                    left:35%;
+                }
                 .imagen-comp{
-                    padding: 0px 480px;
+                    display:flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                    
                     padding-top: 25px;
                 }
                 .cuadro-comp{
-                    padding: 20px 475px;   
+                    display:flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                    
+                    padding: 20px;   
        
                 }
                 .boton-comp{
-                    padding:0px 440px;
+                    display:flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                    padding:0px;
                     padding-bottom:20px;
                 }  
             }
@@ -123,21 +167,26 @@ export function initResultado(param){
         containerEl.appendChild(style);
         containerEl.appendChild(componentEl);
         const imagen = containerEl.querySelector("imagen-estrella").shadowRoot.querySelector("img");
+        const texto = containerEl.querySelector("imagen-estrella").shadowRoot.querySelector(".texto");
+        
+        
+        texto.textContent= "Perdiste";
         imagen.setAttribute("src", estrellaPerdedora)        
     }
 
     const boton = componentEl.querySelector('boton-component').shadowRoot.querySelector('.boton');
     boton.addEventListener("click",(e)=>{
-        state.initScore();
         param.goTo("/instrucciones")
     });
+    console.log(containerEl);
+    
     return containerEl;   
 }
 
 function verificar(){
     
-    const lastState = JSON.parse(localStorage.getItem("score"));
-    if(lastState.usuario == 4)
+    const lastState = state.getState().ultimoGanador;
+    if(lastState == "usuario")
         return "usuario"
     else
         return "pc"

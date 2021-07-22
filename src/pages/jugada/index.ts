@@ -20,11 +20,20 @@ export function initJugada(param){
         @media (min-width: 376px) {
 
             .comp__tiempo{
-                padding: 170px 460px;
+                padding: 170px;
+                display:flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
             }
             .comp__footer{
                 padding: 0px ;
-                padding-left:480px;
+                 display:flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
             }
         }
         
@@ -49,10 +58,10 @@ export function initJugada(param){
     const papel = elementoJugada("papel", containerEl);
     const tijera = elementoJugada("tijera", containerEl);
     
+    contador(containerEl,param);
     escuchoClick(piedra,param,containerEl);
     escuchoClick(papel,param,containerEl);
     escuchoClick(tijera,param,containerEl);
-    contador(containerEl);
     
     
     
@@ -90,12 +99,8 @@ function escuchoClick(el:Element,param,containerEl){
         //cambio el estilo de nuevo
         cambioEstiloConClick(el,containerEl);
         setTimeout(()=>{estiloResultadoFinal(jugadaPc,el,containerEl);},1000);
-        if(lastState.ganador == true){
-            setTimeout(()=>{param.goTo("/resultado");},2000)
-        }
-        else{
-            setTimeout(()=>{param.goTo("/jugada")},2000);
-        }
+        
+        setTimeout(()=>{param.goTo("/resultado");},2000);
     });
 }
 
@@ -126,8 +131,28 @@ function estiloResultadoFinal(jugadaPc,el:Element,containerEl:Element){
     var nuevoCont = document.createElement("div");
     style.textContent=
     `
+    @media (min-width: 376px) {
+        .pc{
+            
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .usuario{
+            
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+    }
 
+        
     `;
+    
     nuevoCont.innerHTML=`
     <div class="pc">
         <footer-component class="pc__comp">h</footer-component>
@@ -145,9 +170,7 @@ function estiloResultadoFinal(jugadaPc,el:Element,containerEl:Element){
         styleShadow.textContent=`
         img{
             opacity: 0;
-            position:fixed;
-            
-            
+            position:fixed;              
         }
         `
         shadowRoot.appendChild(styleShadow);
@@ -170,7 +193,7 @@ function estiloResultadoFinal(jugadaPc,el:Element,containerEl:Element){
 
         @media (min-width: 376px) {
             img{
-                padding-right:520px;
+                
                 padding-top:95px;
             }
         }
@@ -180,11 +203,7 @@ function estiloResultadoFinal(jugadaPc,el:Element,containerEl:Element){
     pc.appendChild(stylePc);
 
     const usuario = nuevoCont.querySelector(".usuario__comp").shadowRoot;
-    
-    
-    const styleUsuario = document.createElement("style");
-    
-    
+    const styleUsuario = document.createElement("style");    
     styleUsuario.textContent=
     ` 
         img{
@@ -199,7 +218,7 @@ function estiloResultadoFinal(jugadaPc,el:Element,containerEl:Element){
         }
         @media (min-width: 376px) {
             img{
-                padding-left:520px;
+                
                 padding-top:55px;
             }
         }
@@ -208,14 +227,27 @@ function estiloResultadoFinal(jugadaPc,el:Element,containerEl:Element){
     containerEl.appendChild(style);
     containerEl.appendChild(nuevoCont);
     
+    
+    
 }
-function contador(containerEl){
+function contador(containerEl,param){
+
+    
+    
+    const boton = containerEl.querySelector('.comp__footer');
+    boton.addEventListener("click", (e)=>{
+        clearInterval(intervalo);
+    });
+    
+    
     var tiempo = containerEl.querySelector('tiempo-component').shadowRoot.querySelector('.contador');
     tiempo.innerHTML = "3";
     const intervalo = setInterval(()=>{
         tiempo.textContent--;
-        if(tiempo.textContent == 0)
+        if(tiempo.textContent == 0){
+            param.goTo("/home")
             clearInterval(intervalo);
+        }
     },1000);
     
 }
