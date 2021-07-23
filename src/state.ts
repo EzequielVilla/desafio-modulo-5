@@ -4,7 +4,6 @@ type Jugadores = "usuario" | "pc";
 
 export const state = {
     data : {},
-    listeners: [],
 
     getState(){
         return this.data;

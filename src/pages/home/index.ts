@@ -3,7 +3,12 @@ import { state } from "../../state";
 
 
 export function initHome(param){
-    state.initScore();
+    //inicializo el score.
+    const lastState = state.getState();
+    if (lastState.inicializo == false){
+        state.initScore();
+    }
+
     const containerEl = document.createElement('div');
     containerEl.classList.add("home-cont");
     const componentEl = document.createElement("div");

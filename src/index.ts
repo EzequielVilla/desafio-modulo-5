@@ -20,7 +20,7 @@ function main(){
     initFooter();
     initCuadro();
     const root = document.querySelector(".root");  
-    // state.initScore();  
+    
     
     initRouter(root);
 }
